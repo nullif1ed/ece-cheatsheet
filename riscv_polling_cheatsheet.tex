@@ -89,14 +89,12 @@ done:
 \section*{Stack Manipulation (Push / Pop)}
 
 \begin{lstlisting}
-# PUSH values (stack grows DOWNWARDS)
-addi sp, sp, -16        # allocate space
+# PUSH (allocate space first)
+addi sp, sp, -16
 sw ra, 12(sp)
 sw s0, 8(sp)
 
-# ... function body ...
-
-# POP values (reverse order)
+# POP (restore then free)
 lw s0, 8(sp)
 lw ra, 12(sp)
 addi sp, sp, 16
@@ -105,25 +103,73 @@ jr ra
 
 \textbf{Rules:}
 \begin{itemize}
-\item Always adjust \texttt{sp} \textbf{first} when pushing
-\item Always restore registers \textbf{before} adjusting \texttt{sp} when popping
+\item Stack grows DOWN (towards smaller addresses)
+\item Adjust \texttt{sp} first on push
+\item Restore registers before freeing stack
 \item Callee-saved: \texttt{s0--s11}, \texttt{ra}
 \item Caller-saved: \texttt{t0--t6}, \texttt{a0--a7}
 \end{itemize}
 
-\section*{Interrupt Enabling}
-\begin{lstlisting}
-li t0, 0x80          
-csrs mie, t0         # enable machine timer interrupt
+\section*{Interrupt Setup Example}
 
-li t0, 0x8           
-csrs mstatus, t0     # set global MIE bit
+\begin{lstlisting}
+.global _start
+_start:
+    li sp, 0x20000            # initialize stack pointer
+
+    jal CONFIG_DEVICE         # setup peripherals
+
+    # register handler address
+    la t0, interrupt_handler
+    csrw mtvec, t0
+
+    # enable interrupt source 17
+    li t0, 0x00020000         # bit 17
+    csrw mie, t0
+
+    # enable global interrupts
+    li t0, 0x8                # MIE bit
+    csrw mstatus, t0
+
+END:
+    j END                     # wait for interrupt
 \end{lstlisting}
 
-\subsection*{Check Cause of Interrupt}
+\subsection*{Interrupt Handler Template}
 \begin{lstlisting}
-csrr t0, mcause      # bit31 = interrupt flag, lower bits=cause
+interrupt_handler:
+    addi sp, sp, -16
+    sw ra, 12(sp)
+
+    # ... handle interrupt ...
+
+    lw ra, 12(sp)
+    addi sp, sp, 16
+    mret
 \end{lstlisting}
+
+\section*{Hex to Binary Bit Mapping}
+
+\begin{lstlisting}
+Hex: 0x00020000
+
+Binary:
+0000 0000 0000 0010 0000 0000 0000 0000
+                      ^
+                      |
+                     bit 17
+\end{lstlisting}
+
+\textbf{Explanation:}
+\begin{itemize}
+\item Each hex digit = 4 binary bits
+\item \texttt{0x00020000} means:
+\begin{itemize}
+\item Only the 17th bit is 1
+\item All other bits are 0
+\end{itemize}
+\item That bit enables interrupt line 17 in \texttt{mie}
+\end{itemize}
 
 \section*{FULLY COMMENTED POLLING EXAMPLE}
 
