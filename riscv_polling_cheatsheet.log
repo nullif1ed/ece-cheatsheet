@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.24)  9 DEC 2025 14:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2025.9.24)  9 DEC 2025 14:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -163,7 +163,7 @@ File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 [1
 
 {C:/Users/nicho/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/nich
-o/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] [2]
+o/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/base/8r.enc}] [2] [3]
 (riscv_polling_cheatsheet.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
@@ -171,22 +171,22 @@ L3 programming layer <2024-01-04>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 3065 strings out of 474486
- 46296 string characters out of 5743755
- 2214542 words of memory out of 5000000
- 25383 multiletter control sequences out of 15000+600000
- 560347 words of font info for 44 fonts, out of 8000000 for 9000
+ 3069 strings out of 474486
+ 46346 string characters out of 5743755
+ 2208542 words of memory out of 5000000
+ 25386 multiletter control sequences out of 15000+600000
+ 560646 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,5n,65p,193b,1052s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,6n,65p,193b,1608s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\nicho\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm
 1000.pk><C:/Users/nicho/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
 ts/cm/cmbx10.pfb><C:/Users/nicho/AppData/Local/Programs/MiKTeX/fonts/type1/publ
 ic/amsfonts/cm/cmbx12.pfb><C:/Users/nicho/AppData/Local/Programs/MiKTeX/fonts/t
 ype1/public/amsfonts/cm/cmr10.pfb><C:/Users/nicho/AppData/Local/Programs/MiKTeX
 /fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on riscv_polling_cheatsheet.pdf (2 pages, 68081 bytes).
+Output written on riscv_polling_cheatsheet.pdf (3 pages, 75140 bytes).
 PDF statistics:
- 35 PDF objects out of 1000 (max. 8388607)
+ 38 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
