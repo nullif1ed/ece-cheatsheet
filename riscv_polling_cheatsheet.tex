@@ -1,4 +1,3 @@
-
 \documentclass[9pt]{article}
 \usepackage[margin=0.35in]{geometry}
 \usepackage{listings}
@@ -33,7 +32,7 @@ myfunc:
     lw s0, 8(sp)         # restore s0
     lw ra, 12(sp)        # restore ra
     addi sp, sp, 16      # deallocate stack
-    ret                  # return to caller
+    jr ra                # return to caller
 \end{lstlisting}
 
 \subsection*{Recursive Sum n + (n-1) + ... + 1}
@@ -54,7 +53,7 @@ base:
 done:
     lw ra, 12(sp)        # restore ra
     addi sp, sp, 16      # pop frame
-    ret
+    jr ra
 \end{lstlisting}
 
 \subsection*{Recursive Fibonacci}
@@ -84,8 +83,33 @@ base:
 done:
     lw ra, 28(sp)
     addi sp, sp, 32
-    ret
+    jr ra
 \end{lstlisting}
+
+\section*{Stack Manipulation (Push / Pop)}
+
+\begin{lstlisting}
+# PUSH values (stack grows DOWNWARDS)
+addi sp, sp, -16        # allocate space
+sw ra, 12(sp)
+sw s0, 8(sp)
+
+# ... function body ...
+
+# POP values (reverse order)
+lw s0, 8(sp)
+lw ra, 12(sp)
+addi sp, sp, 16
+jr ra
+\end{lstlisting}
+
+\textbf{Rules:}
+\begin{itemize}
+\item Always adjust \texttt{sp} \textbf{first} when pushing
+\item Always restore registers \textbf{before} adjusting \texttt{sp} when popping
+\item Callee-saved: \texttt{s0--s11}, \texttt{ra}
+\item Caller-saved: \texttt{t0--t6}, \texttt{a0--a7}
+\end{itemize}
 
 \section*{Interrupt Enabling}
 \begin{lstlisting}
